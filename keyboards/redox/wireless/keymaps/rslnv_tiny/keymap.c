@@ -2,6 +2,7 @@
 
 enum layers {
     _QWERTY,
+    _NUMS,
     _SYMB,
 };
 
@@ -19,8 +20,11 @@ enum layers {
 #define CKC_L RGUI_T(KC_L) // r meta, l
 #define CKC_SCLN RALT_T(KC_SCLN) // r alt, ;:
 
-#define CKC_BSPC LT(_SYMB, KC_BSPC) // layer _SYMB, backspace
-#define CKC_DEL LT(_SYMB, KC_DEL) // layer _SYMB, delete
+#define CKC_BSPC LT(_NUMS, KC_BSPC) // layer _NUMS, backspace
+#define CKC_DEL LT(_NUMS, KC_DEL) // layer _NUMS, delete
+
+#define CKC_ENT LT(_SYMB, KC_ENT) // layer _SYMB, enter
+#define CKC_SPC LT(_SYMB, KC_SPC) // layer _SYMB, space
 
 // combos
 const uint16_t PROGMEM combo_grv[] = {CKC_S, CKC_D, COMBO_END}; // `~
@@ -49,7 +53,7 @@ combo_t key_combos[] = {
     COMBO(combo_bsls, KC_BSLS),
 };
 
-// layer _SYMB
+// layer _NUMS
 // mod taps
 #define CKC_HOME LGUI_T(KC_HOME) // l meta, home
 #define CKC_PGUP LCTL_T(KC_PGUP) // l control, page up
@@ -60,8 +64,8 @@ combo_t key_combos[] = {
 #define CKC_RIGHT RGUI_T(KC_RIGHT) // r meta, right
 #define CKC_PND UC(0x00A3) // pound sign
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬─────────┬────────┐                                            ┌────────┬────────┬────────┬────────┬─────────┬────────┐
      XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX  ,XXXXXXX ,                                             XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX  ,KC_CAPS ,
@@ -72,18 +76,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼─────────┼────────┼─────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼─────────┼────────┤
      XXXXXXX ,KC_Z    ,KC_X    ,KC_C    ,KC_V     ,KC_B    ,KC_PSCR  ,KC_SCRL ,        KC_PAUS ,KC_INS  ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH  ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼─────┬───┴────┬───┼─────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼─────────┼────────┤
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,      XXXXXXX ,    CKC_BSPC ,KC_ENT  ,        KC_SPC  ,CKC_DEL ,    XXXXXXX ,     XXXXXXX ,XXXXXXX ,XXXXXXX  ,XXXXXXX
+     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,      XXXXXXX ,    CKC_BSPC ,CKC_ENT ,        CKC_SPC ,CKC_DEL ,    XXXXXXX ,     XXXXXXX ,XXXXXXX ,XXXXXXX  ,XXXXXXX
   //└────────┴────────┴────────┴────────┘     └────────┘   └─────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴─────────┴────────┘
   ),
 
-  [_SYMB] = LAYOUT(
+  [_NUMS] = LAYOUT(
   //┌────────┬────────┬─────────┬─────────┬─────────┬────────┐                                           ┌────────┬─────────┬────────┬──────────┬────────┬────────┐
      XXXXXXX ,KC_F1   ,KC_F2    ,KC_F3    ,KC_F4    ,KC_F5   ,                                            KC_F6   ,KC_F7    ,KC_F8   ,KC_F9     ,KC_F10  ,XXXXXXX ,
   //├────────┼────────┼─────────┼─────────┼─────────┼────────┼────────┐                         ┌────────┼────────┼─────────┼────────┼──────────┼────────┼────────┤
      XXXXXXX ,KC_1    ,KC_2     ,KC_3     ,KC_4     ,KC_5    ,XXXXXXX ,                          XXXXXXX ,KC_6    ,KC_7     ,KC_8    ,KC_9      ,KC_0    ,XXXXXXX ,
   //├────────┼────────┼─────────┼─────────┼─────────┼────────┼────────┤                         ├────────┼────────┼─────────┼────────┼──────────┼────────┼────────┤
      XXXXXXX ,KC_LALT ,CKC_HOME ,CKC_PGUP ,CKC_PGDN ,KC_END  ,KC_F11  ,                          KC_F12  ,KC_LEFT ,CKC_DOWN ,CKC_UP  ,CKC_RIGHT ,KC_RALT ,XXXXXXX ,
+  //├────────┼────────┼─────────┼─────────┼─────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼─────────┼────────┼──────────┼────────┼────────┤
      XXXXXXX ,CKC_PND ,XXXXXXX  ,XXXXXXX  ,XXXXXXX  ,XXXXXXX ,QK_BOOT ,XXXXXXX ,        XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX  ,XXXXXXX ,XXXXXXX   ,XXXXXXX ,XXXXXXX ,
+  //├────────┼────────┼─────────┼─────────┼────┬────┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬─────┼────────┼──────────┼────────┼────────┤
+     XXXXXXX ,XXXXXXX ,XXXXXXX  ,XXXXXXX  ,     XXXXXXX  ,    _______ ,_______ ,        _______ ,_______ ,    XXXXXXX ,      XXXXXXX ,XXXXXXX   ,XXXXXXX ,XXXXXXX
+  //└────────┴────────┴─────────┴─────────┘    └─────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘     └────────┴──────────┴────────┴────────┘
+  ),
+
+  [_SYMB] = LAYOUT(
+  //┌────────┬────────┬─────────┬─────────┬─────────┬────────┐                                           ┌────────┬─────────┬────────┬──────────┬────────┬────────┐
+     XXXXXXX ,KC_F1   ,KC_F2    ,KC_F3    ,KC_F4    ,KC_F5   ,                                            KC_F6   ,KC_F7    ,KC_F8   ,KC_F9     ,KC_F10  ,XXXXXXX ,
+  //├────────┼────────┼─────────┼─────────┼─────────┼────────┼────────┐                         ┌────────┼────────┼─────────┼────────┼──────────┼────────┼────────┤
+     XXXXXXX ,KC_EXLM ,KC_AT    ,KC_HASH  ,KC_DLR   ,KC_PERC ,XXXXXXX ,                          XXXXXXX ,KC_CIRC ,KC_AMPR  ,KC_ASTR ,KC_LPRN   ,KC_RPRN ,XXXXXXX ,
+  //├────────┼────────┼─────────┼─────────┼─────────┼────────┼────────┤                         ├────────┼────────┼─────────┼────────┼──────────┼────────┼────────┤
+     XXXXXXX ,KC_LALT ,CKC_HOME ,CKC_PGUP ,CKC_PGDN ,KC_END  ,KC_F11  ,                          KC_F12  ,KC_LEFT ,CKC_DOWN ,CKC_UP  ,CKC_RIGHT ,KC_RALT ,XXXXXXX ,
   //├────────┼────────┼─────────┼─────────┼─────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼─────────┼────────┼──────────┼────────┼────────┤
      XXXXXXX ,XXXXXXX ,XXXXXXX  ,XXXXXXX  ,XXXXXXX  ,XXXXXXX ,QK_BOOT ,XXXXXXX ,        XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX  ,XXXXXXX ,XXXXXXX   ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼─────────┼─────────┼────┬────┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬─────┼────────┼──────────┼────────┼────────┤
