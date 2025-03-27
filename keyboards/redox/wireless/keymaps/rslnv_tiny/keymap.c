@@ -58,6 +58,7 @@ combo_t key_combos[] = {
 #define CKC_DOWN RSFT_T(KC_DOWN) // r shift, down
 #define CKC_UP RCTL_T(KC_UP) // r control, up
 #define CKC_RIGHT RGUI_T(KC_RIGHT) // r meta, right
+#define CKC_PND UC(0x00A3) // pound sign
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -82,6 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      XXXXXXX ,KC_1    ,KC_2     ,KC_3     ,KC_4     ,KC_5    ,XXXXXXX ,                          XXXXXXX ,KC_6    ,KC_7     ,KC_8    ,KC_9      ,KC_0    ,XXXXXXX ,
   //├────────┼────────┼─────────┼─────────┼─────────┼────────┼────────┤                         ├────────┼────────┼─────────┼────────┼──────────┼────────┼────────┤
      XXXXXXX ,KC_LALT ,CKC_HOME ,CKC_PGUP ,CKC_PGDN ,KC_END  ,KC_F11  ,                          KC_F12  ,KC_LEFT ,CKC_DOWN ,CKC_UP  ,CKC_RIGHT ,KC_RALT ,XXXXXXX ,
+     XXXXXXX ,CKC_PND ,XXXXXXX  ,XXXXXXX  ,XXXXXXX  ,XXXXXXX ,QK_BOOT ,XXXXXXX ,        XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX  ,XXXXXXX ,XXXXXXX   ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼─────────┼─────────┼─────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼─────────┼────────┼──────────┼────────┼────────┤
      XXXXXXX ,XXXXXXX ,XXXXXXX  ,XXXXXXX  ,XXXXXXX  ,XXXXXXX ,QK_BOOT ,XXXXXXX ,        XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX  ,XXXXXXX ,XXXXXXX   ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼─────────┼─────────┼────┬────┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬─────┼────────┼──────────┼────────┼────────┤
